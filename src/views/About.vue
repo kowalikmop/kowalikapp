@@ -1,14 +1,14 @@
 <template>
 
  <div class="container">
-  <div class="row">
-    <div class="col-sm">
-  <input v-model="apperTitle"/>
-    </div>
-    <div class="col-sm">
- <button @click="textinput">Pobierz</button>
-    </div>
-    </div>
+      <div class="input-group mb-3">
+            <input v-model="apperTitle" type="text" class="form-control"
+            placeholder="Szukaj...">
+            <div class="input-group-append">
+              <button @click="textinput" class="btn btn-success" type="submit">Pobierz</button>
+            </div>
+          </div>
+
       <div class="row">
     <div class="col-sm">
      <ul>
@@ -41,3 +41,13 @@ export default {
   },
 };
 </script>
+<style scoped>
+ul {
+  list-style-type: none;
+
+}
+li {
+  margin-bottom: 100px;
+
+}
+</style>

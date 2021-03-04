@@ -1,24 +1,43 @@
 <template>
-  <div class="home">
-  <input v-model="appTitle" />
-  <h1>Liczba pomnożona przez 2 to:</h1>
-   <transition name="fade">
-  <span v-if="appTitle > 0">{{ appTitle * 2}}</span>
-  </transition>
-  <button @click="appTitle += 1"> + </button>
-  <button @click="appTitle -= 1"> - </button>
+  <div class="container">
+          <div class="input-group mb-3">
+            <input v-model="newtitle" type="text" class="form-control" placeholder="Dodaj zadanie">
+            <div class="input-group-append">
+              <button @click="addTask" class="btn btn-success" type="submit">Dodaj</button>
+            </div>
+          </div>
+  <div v-for="item in elements" :key="item.id"
+  v-bind:class="{complited: item.statuscomplite}" class="alert alert-success">
+    <button v-if="!item.statuscomplite" @click="done(item.id)" type="button" class="close">
+      &times;</button>
+    {{item.title}}</div>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      appTitle: null,
+      idek: 0,
+      newtitle: '',
+      elements: [],
     };
+  },
+  methods: {
+    addTask() {
+      this.elements.push({ title: this.newtitle, statuscomplite: false, id: this.idek += 1 });
+      this.newtitle = '';
+    },
+    done(id) {
+      const index = this.elements.findIndex((el) => el.id === id);
+      this.elements[index].statuscomplite = true;
+    },
   },
 };
 </script>
 <style scoped>
+input {
+              width: 200px;
+        }
 .fade-enter-active, .fade-leave-active {
   transition: all .3s;
 }
@@ -26,4 +45,7 @@ export default {
   opacity: 0;
 font-size: 40px;
 }
+  .complited {
+          opacity: 0.5;
+  }
 </style>
