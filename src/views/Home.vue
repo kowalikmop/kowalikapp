@@ -24,8 +24,10 @@ export default {
   },
   methods: {
     addTask() {
-      this.elements.push({ title: this.newtitle, statuscomplite: false, id: this.idek += 1 });
-      this.newtitle = '';
+      if (this.newtitle) {
+        this.elements.push({ title: this.newtitle, statuscomplite: false, id: this.idek += 1 });
+        this.newtitle = '';
+      }
     },
     done(id) {
       const index = this.elements.findIndex((el) => el.id === id);
